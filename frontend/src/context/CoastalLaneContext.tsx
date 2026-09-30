@@ -10,6 +10,10 @@ interface CoastalLaneContextType {
   isInfoOpen: boolean;
   setIsInfoOpen: (open: boolean) => void;
   toggleInfo: () => void;
+  isMobileMenuOpen: boolean;
+  setIsMobileMenuOpen: (open: boolean) => void;
+  toggleMobileMenu: () => void;
+  closeMobileMenu: () => void;
 }
 
 const CoastalLaneContext = createContext<CoastalLaneContextType>({
@@ -19,11 +23,16 @@ const CoastalLaneContext = createContext<CoastalLaneContextType>({
   isInfoOpen: false,
   setIsInfoOpen: () => {},
   toggleInfo: () => {},
+  isMobileMenuOpen: false,
+  setIsMobileMenuOpen: () => {},
+  toggleMobileMenu: () => {},
+  closeMobileMenu: () => {},
 });
 
 export const CoastalLaneProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedLaneId, setSelectedLaneId] = useState<string>('all');
   const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
     try {
@@ -46,6 +55,8 @@ export const CoastalLaneProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   const toggleInfo = () => setIsInfoOpen((prev) => !prev);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   const currentLane = getCoastalLane(selectedLaneId);
 
@@ -58,6 +69,10 @@ export const CoastalLaneProvider: React.FC<{ children: React.ReactNode }> = ({ c
         isInfoOpen,
         setIsInfoOpen,
         toggleInfo,
+        isMobileMenuOpen,
+        setIsMobileMenuOpen,
+        toggleMobileMenu,
+        closeMobileMenu,
       }}
     >
       {children}

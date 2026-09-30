@@ -274,8 +274,8 @@ export default function Dashboard() {
   const topPriorityAssets = assetsList.filter((a) => (a.vulnerability_score || 0) >= 50).slice(0, 4);
 
   return (
-    <div className="relative p-4 sm:p-6 space-y-6 max-w-[1600px] mx-auto h-full flex flex-col overflow-hidden">
-      {/* ── Background Cyclone/Wind Breeze Canvas ── */}
+    <div className="relative p-3 sm:p-5 lg:p-6 space-y-5 max-w-[1600px] mx-auto min-h-full flex flex-col">
+      {/* ── Background Cyclone Canvas ── */}
       <CycloneBackground density={40} speedMultiplier={0.8} />
 
       {/* ── Header ───────────────────────────────────────────────── */}
@@ -283,13 +283,13 @@ export default function Dashboard() {
         <div className="flex items-center gap-3">
           <BrandLogo size={38} glow={true} />
           <div>
-            <h1 className="page-title flex items-center gap-2">
+            <h1 className="page-title flex items-center gap-2 text-base sm:text-xl">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-pulse shrink-0" />
               Command Center — {currentLane.name}
             </h1>
-            <p className="page-sub flex flex-wrap items-center gap-2">
+            <p className="page-sub flex flex-wrap items-center gap-2 text-xs">
               <span>Pan-India Coastal Defense &amp; Early Warning System</span>
-              <span>·</span>
+              <span className="hidden sm:inline">·</span>
               <span className="font-mono text-cyan-700 dark:text-cyan-400 font-semibold">
                 {currentLane.coastline_km} km Coastline
               </span>
@@ -297,121 +297,121 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2">
           <CoastalLaneSelector />
           <Link href="/stormtwin" className="btn-ghost btn-sm bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border border-slate-200 dark:border-slate-700">
             <Layers size={14} />
-            <span>Simulate Scenario</span>
+            <span className="hidden xs:inline">Simulate Scenario</span>
           </Link>
           <Link href="/ai" className="btn-primary btn-sm shadow-sm">
             <Droplets size={14} />
-            <span>Varuna AI Advisory</span>
+            <span className="hidden xs:inline">Varuna AI</span>
           </Link>
         </div>
       </div>
 
-      {/* ── KPI Cards ────────────────────────────────────────────── */}
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* ── KPI Cards Grid ────────────────────────────────────────── */}
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {KPIS.map(({ icon: Icon, label, key, sub }, i) => (
           <motion.div
             key={key}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
-            className="card p-4 flex items-center justify-between hover:border-cyan-500/40 dark:hover:border-cyan-500/40 transition-all backdrop-blur-sm bg-white/90 dark:bg-[#111827]/90 shadow-sm"
+            className="card p-3.5 sm:p-4 flex items-center justify-between hover:border-cyan-500/40 dark:hover:border-cyan-500/40 transition-all backdrop-blur-sm bg-white/90 dark:bg-[#111827]/90 shadow-xs"
           >
             <div className="space-y-1">
-              <div className="label">{label}</div>
-              <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              <div className="label text-[11px] sm:text-xs">{label}</div>
+              <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                 {data[key] ?? '…'}
               </div>
-              <div className="text-[11px] text-slate-400 dark:text-slate-500 font-medium">{sub}</div>
+              <div className="text-[10px] sm:text-[11px] text-slate-400 dark:text-slate-500 font-medium">{sub}</div>
             </div>
-            <div className="p-2.5 rounded-xl bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-700 shadow-xs">
-              <Icon size={22} />
+            <div className="p-2 sm:p-2.5 rounded-xl bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-700 shadow-xs shrink-0">
+              <Icon size={20} className="sm:w-[22px] sm:h-[22px]" />
             </div>
           </motion.div>
         ))}
       </div>
 
       {/* ── Main Grid: Spatial Map + Intelligence Panel ───────────── */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-4 flex-1 min-h-[460px]">
-        {/* Spatial Map (3 cols) */}
-        <div className="lg:col-span-3 card overflow-hidden relative flex flex-col border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-4 flex-1 min-h-[400px]">
+        {/* Spatial Map (3 cols on lg) */}
+        <div className="lg:col-span-3 card overflow-hidden relative flex flex-col border border-slate-200 dark:border-slate-800 shadow-xs min-h-[350px] sm:min-h-[440px]">
           {/* Map top badge */}
-          <div className="absolute top-3 left-3 z-10 flex items-center gap-2 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-slate-700 dark:text-slate-200 font-semibold">
-              Radar Inundation &amp; Coastal Infrastructure ({currentLane.shortName})
+          <div className="absolute top-3 left-3 z-10 flex items-center gap-2 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs shadow-xs max-w-[90%] truncate">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <span className="text-slate-700 dark:text-slate-200 font-semibold truncate">
+              Radar Inundation ({currentLane.shortName})
             </span>
           </div>
 
-          <div ref={mapContainer} className="w-full h-full min-h-[440px]" />
+          <div ref={mapContainer} className="w-full h-full min-h-[350px] sm:min-h-[440px]" />
 
           {/* Map footer overlay */}
-          <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 shadow-sm">
-            <div className="flex items-center gap-4 font-medium">
-              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-red-600" /> Extreme (80-100)</span>
-              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-orange-500" /> Very High (60-80)</span>
-              <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-yellow-500" /> High (40-60)</span>
+          <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md px-3 sm:px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 shadow-xs">
+            <div className="flex flex-wrap items-center gap-3 font-medium text-[11px] sm:text-xs">
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-600" /> Extreme</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-orange-500" /> Very High</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-yellow-500" /> High</span>
             </div>
-            <div className="text-slate-400 dark:text-slate-400 text-[11px] font-medium font-mono">
-              Basin: {currentLane.basin} · {currentLane.spatialDomain}
+            <div className="text-slate-400 dark:text-slate-400 text-[10px] sm:text-[11px] font-medium font-mono truncate">
+              {currentLane.spatialDomain}
             </div>
           </div>
         </div>
 
-        {/* Operational Brief panel (1 col) */}
-        <div className="card p-5 flex flex-col justify-between gap-4 border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-sm shadow-sm">
+        {/* Operational Brief panel (1 col on lg) */}
+        <div className="card p-4 sm:p-5 flex flex-col justify-between gap-4 border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-sm shadow-xs">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-              <div className="section-title flex items-center gap-2 text-cyan-700 dark:text-cyan-400">
-                <ShieldAlert size={17} />
+              <div className="section-title flex items-center gap-2 text-cyan-700 dark:text-cyan-400 text-sm">
+                <ShieldAlert size={16} />
                 <span>Operational Brief</span>
               </div>
-              <span className="badge-neutral font-mono text-[10px]">AUTO-SYNTHESIS</span>
+              <span className="badge-neutral font-mono text-[9px] sm:text-[10px]">AUTO-SYNTHESIS</span>
             </div>
 
-            <div className="mt-4 space-y-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+            <div className="mt-3.5 space-y-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
               <p>
                 Continuous multi-hazard risk synthesis active for <strong className="text-slate-900 dark:text-slate-200">{currentLane.name}</strong>.
               </p>
 
               <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
                 <div className="text-slate-700 dark:text-slate-300 font-semibold flex items-center justify-between">
-                  <span>Critical Priority Assets:</span>
+                  <span>Priority Assets:</span>
                   <span className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 font-bold">{topPriorityAssets.length} Flagged</span>
                 </div>
                 {topPriorityAssets.length > 0 ? (
                   topPriorityAssets.map((asset) => (
                     <div key={asset.id} className="flex justify-between items-center text-slate-700 dark:text-slate-300 pt-1 border-t border-slate-200/50 dark:border-slate-700/50">
-                      <span className="truncate max-w-[140px] font-medium">{asset.name}</span>
-                      <span className={`font-mono font-bold shrink-0 ${asset.vulnerability_score >= 80 ? 'text-red-600 dark:text-red-400' : 'text-orange-500 dark:text-orange-400'}`}>
-                        {asset.vulnerability_score} ({asset.risk_level || 'At Risk'})
+                      <span className="truncate max-w-[130px] font-medium">{asset.name}</span>
+                      <span className={`font-mono font-bold shrink-0 text-[11px] ${asset.vulnerability_score >= 80 ? 'text-red-600 dark:text-red-400' : 'text-orange-500 dark:text-orange-400'}`}>
+                        {asset.vulnerability_score}
                       </span>
                     </div>
                   ))
                 ) : (
-                  <div className="text-slate-400 italic">No critical threshold breaches detected.</div>
+                  <div className="text-slate-400 italic text-[11px]">No critical threshold breaches detected.</div>
                 )}
               </div>
 
               <div className="p-2.5 rounded-lg bg-cyan-50/50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800/60 text-[11px] text-cyan-800 dark:text-cyan-300">
                 <div className="font-bold mb-0.5">SDRF / NDRF Allocation:</div>
-                <div className="leading-snug">{currentLane.sdrfForce}</div>
+                <div className="leading-snug text-[11px]">{currentLane.sdrfForce}</div>
               </div>
             </div>
           </div>
 
           {/* Quick Action Footer */}
-          <div className="space-y-3 pt-3 border-t border-slate-200 dark:border-slate-800">
-            <Link href="/ai" className="btn-primary btn-sm w-full shadow-xs">
-              <span>Review AI Advisory for {currentLane.shortName}</span>
+          <div className="space-y-2.5 pt-3 border-t border-slate-200 dark:border-slate-800">
+            <Link href="/ai" className="btn-primary btn-sm w-full shadow-xs text-xs">
+              <span>Review AI Advisory</span>
               <ExternalLink size={13} />
             </Link>
             <div className="flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500 font-mono font-medium">
               <span>REFRESH: 60s</span>
-              <span>TELEMETRY ACTIVE</span>
+              <span>TELEMETRY LIVE</span>
             </div>
           </div>
         </div>
