@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="320" viewBox="0 0 960 320" fill="none">
+  <rect width="960" height="320" fill="#f8fafc"/>
+
+  <!-- Mark: cyclone eye over a wave, in a rounded tile -->
+  <g transform="translate(40 40)">
+    <rect x="0" y="0" width="240" height="240" rx="52" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+
+    <!-- swirling cyclone bands -->
+    <g transform="translate(120 108)" stroke="#0891b2" stroke-width="14" stroke-linecap="round" fill="none">
+      <path d="M0 -66 A66 66 0 0 1 57 -33" opacity="0.35"/>
+      <path d="M0 -46 A46 46 0 0 1 40 -23" opacity="0.6"/>
+      <path d="M0 66 A66 66 0 0 1 -57 33" opacity="0.35"/>
+      <path d="M0 46 A46 46 0 0 1 -40 23" opacity="0.6"/>
+    </g>
+    <!-- eye -->
+    <circle cx="120" cy="108" r="16" fill="#0891b2"/>
+
+    <!-- wave / water base -->
+    <path d="M28 176 q30 -26 60 0 t60 0 t60 0 t24 -6"
+          stroke="#0891b2" stroke-width="12" stroke-linecap="round" fill="none"/>
+    <path d="M28 202 q30 -22 60 0 t60 0 t60 0 t24 -5"
+          stroke="#22d3ee" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.7"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(320 0)">
+    <text x="0" y="150" font-family="Inter, 'Segoe UI', system-ui, sans-serif" font-size="82" font-weight="700" fill="#0f172a">Varuna<tspan fill="#0891b2">Watch</tspan></text>
+    <text x="4" y="196" font-family="Inter, 'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="500" letter-spacing="3" fill="#64748b">COASTAL CYCLONE &amp; FLOOD INTELLIGENCE</text>
+  </g>
+</svg>
