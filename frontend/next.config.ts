@@ -1,10 +1,15 @@
 import type { NextConfig } from "next";
+import path from "path";
 
-const rawUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
-const backendBase = rawUrl.replace(/\/api\/?$/, "").replace(/\/+$/, "");
+const rawUrl = process.env.NEXT_PUBLIC_API_URL || "";
+const backendBase = rawUrl ? rawUrl.replace(/\/api\/?$/, "").replace(/\/+$/, "") : "";
 
 const nextConfig: NextConfig = {
   async rewrites() {
+    if (!backendBase) {
+      // Use native Next.js serverless API routes inside app/api/[...path]/route.ts
+      return [];
+    }
     return [
       {
         source: "/api/:path*",
@@ -12,8 +17,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Required to silence Turbopack warning in Next.js 16
-  turbopack: {},
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
 };
 
 export default nextConfig;
