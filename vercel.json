@@ -4,12 +4,6 @@
   "rootDirectory": "frontend",
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
-  "rewrites": [
-    {
-      "source": "/api/py/:path*",
-      "destination": "http://localhost:8000/api/:path*"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
