@@ -7,16 +7,23 @@ interface CoastalLaneContextType {
   currentLane: CoastalLane;
   setLaneId: (id: string) => void;
   lanes: CoastalLane[];
+  isInfoOpen: boolean;
+  setIsInfoOpen: (open: boolean) => void;
+  toggleInfo: () => void;
 }
 
 const CoastalLaneContext = createContext<CoastalLaneContextType>({
   currentLane: COASTAL_LANES[0],
   setLaneId: () => {},
   lanes: COASTAL_LANES,
+  isInfoOpen: false,
+  setIsInfoOpen: () => {},
+  toggleInfo: () => {},
 });
 
 export const CoastalLaneProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedLaneId, setSelectedLaneId] = useState<string>('all');
+  const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false);
 
   useEffect(() => {
     try {
@@ -38,6 +45,8 @@ export const CoastalLaneProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }
   };
 
+  const toggleInfo = () => setIsInfoOpen((prev) => !prev);
+
   const currentLane = getCoastalLane(selectedLaneId);
 
   return (
@@ -46,6 +55,9 @@ export const CoastalLaneProvider: React.FC<{ children: React.ReactNode }> = ({ c
         currentLane,
         setLaneId: handleSetLaneId,
         lanes: COASTAL_LANES,
+        isInfoOpen,
+        setIsInfoOpen,
+        toggleInfo,
       }}
     >
       {children}

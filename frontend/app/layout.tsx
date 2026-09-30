@@ -1,26 +1,32 @@
 import './globals.css';
 import Link from 'next/link';
 import {
-  Wifi,
   Wind,
   Grid3x3,
   Satellite,
   Bot,
   Bell,
   LayoutDashboard,
-  ShieldAlert,
-  Layers
+  Layers,
+  Info
 } from 'lucide-react';
 import { ThemeProvider } from '@/components/layout/ThemeProvider';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { CoastalLaneProvider } from '@/context/CoastalLaneContext';
 import { TopBar } from '@/components/layout/TopBar';
-
 import { BrandLogo } from '@/components/layout/BrandLogo';
+import { SystemInfoDrawer } from '@/components/layout/SystemInfoDrawer';
 
 export const metadata = {
   title: 'VarunaWatch — Pan-India Coastal Cyclone Intelligence & Resilience Platform',
   description: 'AI-Powered Cyclone Impact & Infrastructure Resilience Platform across All 9 Indian Coastal States & UTs (7,516+ km Coastline)',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/apple-icon.png',
+  },
 };
 
 const NAV = [
@@ -56,6 +62,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex h-screen overflow-hidden antialiased bg-slate-50 dark:bg-[#0b1120] text-slate-900 dark:text-slate-100 transition-colors duration-200">
         <ThemeProvider>
           <CoastalLaneProvider>
+            {/* ─── Slide-over System Specs Drawer ───────────────────── */}
+            <SystemInfoDrawer />
+
             {/* ─── Sidebar ─────────────────────────────────────────────── */}
             <aside className="w-64 bg-white dark:bg-[#111827] border-r border-slate-200 dark:border-slate-700 p-4 flex flex-col justify-between shrink-0 z-30 transition-colors duration-200">
               <div>
@@ -94,26 +103,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </nav>
               </div>
 
-              {/* System Footer */}
-              <div className="pt-4 border-t border-slate-200 dark:border-slate-700 text-xs space-y-1.5">
-                <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-                  <span>Coastline Lanes</span>
-                  <span className="font-semibold text-cyan-700 dark:text-cyan-400">9 States + UTs</span>
-                </div>
-                <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-                  <span>Model Engine</span>
-                  <span className="font-medium text-slate-700 dark:text-slate-300">Deterministic v2.0</span>
-                </div>
-                <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-                  <span>AI Advisory</span>
-                  <span className="font-medium text-slate-700 dark:text-slate-300">Gemini 2.0 Flash</span>
+              {/* Sidebar Footer — Clean Live Telemetry Status */}
+              <div className="pt-4 border-t border-slate-200 dark:border-slate-700 text-xs">
+                <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 font-mono text-[11px]">
+                  <span>Status</span>
+                  <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Operational
+                  </span>
                 </div>
               </div>
             </aside>
 
             {/* ─── Main Content ─────────────────────────────────────────── */}
             <main className="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-50 dark:bg-[#0b1120] transition-colors duration-200">
-              {/* Dynamic Top Bar with State Selector */}
+              {/* Dynamic Top Bar with State Selector & Engine Specs Toggle */}
               <TopBar />
 
               {/* Page content */}

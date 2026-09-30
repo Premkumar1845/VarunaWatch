@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Wifi, Globe, Shield } from 'lucide-react';
+import { Wifi, Globe, Shield, SlidersHorizontal } from 'lucide-react';
 import { useCoastalLane } from '@/context/CoastalLaneContext';
 import { CoastalLaneSelector } from './CoastalLaneSelector';
 
 export const TopBar: React.FC = () => {
-  const { currentLane } = useCoastalLane();
+  const { currentLane, toggleInfo, isInfoOpen } = useCoastalLane();
 
   return (
     <header className="h-14 flex items-center justify-between px-4 sm:px-6 border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-[#111827] shrink-0 z-20 transition-colors duration-200">
@@ -25,6 +25,19 @@ export const TopBar: React.FC = () => {
           <Shield size={12} className="text-cyan-500" />
           <span className="truncate max-w-[200px]">{currentLane.sdrfForce}</span>
         </div>
+
+        <button
+          onClick={toggleInfo}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer ${
+            isInfoOpen
+              ? 'bg-cyan-600 text-white border-cyan-500 shadow-sm'
+              : 'bg-slate-100 dark:bg-slate-800 hover:bg-cyan-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'
+          }`}
+          title="Open System Architecture & Engine Details"
+        >
+          <SlidersHorizontal size={14} className={isInfoOpen ? 'text-white' : 'text-cyan-500'} />
+          <span className="hidden sm:inline">Engine Specs</span>
+        </button>
 
         <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400">
           <Wifi size={13} className="animate-pulse" />
