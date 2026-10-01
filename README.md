@@ -1,7 +1,7 @@
 <div align="center">
   <img src="frontend/public/logo.png" alt="VarunaWatch Logo" width="120" />
-  <h1>VarunaWatch — Intelligence Before Impact</h1>
-  <p><strong>Pan-India AI-Powered Cyclone Impact & Infrastructure Resilience Command Platform</strong></p>
+  <h1>VarunaWatch</h1>
+  <p><strong>AI-Powered Cyclone Impact & Infrastructure Resilience Command Platform</strong></p>
   <p><em>Developed by Team MetaMinds</em></p>
 
   <p>
