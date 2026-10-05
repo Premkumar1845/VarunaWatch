@@ -166,47 +166,6 @@ flowchart TB
     GEMINI --> |Grounded Advisories| COPILOT
     TRIG --> |Alert Streams| SENTINEL
 ```
-
----
-
-## Vercel Deployment Configuration
-
-The repository includes a ready-to-deploy [`vercel.json`](./vercel.json) file:
-
-```json
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
-  "rootDirectory": "frontend",
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "rewrites": [
-    {
-      "source": "/api/py/:path*",
-      "destination": "http://localhost:8000/api/:path*"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" }
-      ]
-    }
-  ]
-}
-```
-
-### Deploying to Vercel
-1. Import `VarunaWatch` into your [Vercel Dashboard](https://vercel.com).
-2. Set Root Directory to `frontend` (auto-detected via `vercel.json`).
-3. Configure Environment Variables (`NEXT_PUBLIC_MAPBOX_TOKEN`, `NEXT_PUBLIC_API_URL`).
-4. Click **Deploy**.
-
----
-
 ## Getting Started
 
 ### 1. Quickstart with Docker Compose
