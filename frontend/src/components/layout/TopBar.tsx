@@ -9,19 +9,19 @@ export const TopBar: React.FC = () => {
   const { currentLane, toggleInfo, isInfoOpen, isMobileMenuOpen, toggleMobileMenu } = useCoastalLane();
 
   return (
-    <header className="h-14 flex items-center justify-between px-3 sm:px-6 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md shrink-0 z-20 transition-colors duration-200">
-      <div className="flex items-center gap-2 sm:gap-3">
+    <header className="h-14 flex items-center justify-between px-3 sm:px-6 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md shrink-0 z-30 transition-colors duration-200">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
         {/* Mobile menu toggle button (visible < lg) */}
         <button
           onClick={toggleMobileMenu}
-          className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
           aria-label="Toggle navigation menu"
         >
           {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
 
-        <CoastalLaneSelector />
-        <div className="hidden md:flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <CoastalLaneSelector align="left" />
+        <div className="hidden md:flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 min-w-0">
           <Globe size={13} className="text-cyan-500 shrink-0" />
           <span className="font-mono text-[11px] truncate max-w-xs xl:max-w-md">
             {currentLane.spatialDomain}
