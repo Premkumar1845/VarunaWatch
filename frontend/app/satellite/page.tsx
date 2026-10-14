@@ -144,24 +144,24 @@ export default function SatelliteView() {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Control Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-4 border-b border-slate-200 card rounded-none">
-        <div className="flex items-center gap-2">
-          <Satellite size={20} className="text-cyan-600" />
-          <h1 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 sm:p-4 border-b border-slate-200 dark:border-slate-800 card rounded-none bg-white dark:bg-[#111827] shrink-0">
+        <div className="flex items-center gap-2 min-w-0">
+          <Satellite size={20} className="text-cyan-600 dark:text-cyan-400 shrink-0" />
+          <h1 className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wide truncate">
             VarunaVision — Earth Observation &amp; Inundation Analysis
           </h1>
         </div>
 
         {/* Multi-temporal tabs */}
-        <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-md">
+        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-md shrink-0">
           {TABS.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-3 py-1 rounded text-xs font-medium transition-colors ${
+              className={`px-2.5 sm:px-3 py-1 rounded text-[11px] sm:text-xs font-medium transition-colors cursor-pointer ${
                 tab === t
-                  ? 'bg-white text-cyan-700 shadow-sm border border-slate-200'
-                  : 'text-slate-500 hover:text-slate-700'
+                  ? 'bg-white dark:bg-slate-900 text-cyan-700 dark:text-cyan-300 shadow-xs border border-slate-200 dark:border-slate-700 font-semibold'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
               }`}
             >
               {t.toUpperCase()} PHASE
@@ -170,9 +170,9 @@ export default function SatelliteView() {
         </div>
 
         {/* Exposure Counter */}
-        <div className="flex items-center gap-2 text-xs">
-          <span className="text-slate-500">High Risk Assets:</span>
-          <span className="band-extreme">
+        <div className="flex items-center gap-2 text-xs shrink-0">
+          <span className="text-slate-500 dark:text-slate-400">High Risk Assets:</span>
+          <span className="band-extreme text-[11px]">
             {exposure.exposed || 5} / {exposure.total || 8} Exposed
           </span>
         </div>
